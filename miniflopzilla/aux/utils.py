@@ -2,7 +2,21 @@ import numpy as np
 from math import factorial
 from itertools import combinations, chain
 from scipy.special import comb
-from models.exceptions import *
+from miniflopzilla.models.exceptions import *
+
+
+
+# Constantes y configuración global
+CONFIG = {
+    "n": 14,
+    "cell_size": 35,
+    "colors": [(23, 63, 53), (0, 255, 153)],
+    "elements": ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'],
+    "label_color": "Coral",
+    "label_font": "arial",
+    "label_size": 20,
+}
+
 
 
 num_dict = {"2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "T": 10, "J": 11, "Q": 12, "K": 13, "A": 14}
@@ -27,33 +41,6 @@ def card_str_to_arr(card_str):
 
 def card_arr_to_str(card_arr):
     return [rev_num_dict[card[0]] + rev_suit_dict[card[1]] for card in card_arr]
-
-#
-# def add_card(card, card_arr):
-#     if type(card) == str:
-#         if len(card_arr) == 0:
-#             card_arr = card_str_to_arr([card])
-#         else:
-#             card_arr = np.concatenate([
-#                 card_arr,
-#                 card_str_to_arr([card])
-#             ], axis=0)
-#
-#     else:
-#         if len(card_arr) == 0:
-#             card_arr = np.array([card])
-#         else:
-#             card_arr = np.concatenate([
-#                 card_arr,
-#                 np.array([card])
-#             ], axis=0)
-#     return card_arr
-#
-# def remove_card(card, card_arr):
-#     if type(card) == str:
-#         return card_arr[~np.all(np.isin(card_arr, card_str_to_arr([card])), axis=1)]
-#     else:
-#         return card_arr[~np.all(np.isin(card_arr, np.array([card])), axis=1)]
 
 def remove_card(card, card_arr):
 

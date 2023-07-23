@@ -6,10 +6,10 @@ import logging
 
 import numpy as np
 
-from models.exceptions import *
-from aux.utils import *
-from hand import Hand
-from ranker import *
+from miniflopzilla.models.exceptions import *
+from miniflopzilla.aux.utils import *
+from miniflopzilla.models.hand import Hand
+from miniflopzilla.models.ranker import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)

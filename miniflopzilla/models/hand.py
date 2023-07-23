@@ -1,6 +1,6 @@
-from aux.utils import *
-from models.exceptions import *
-from ranker import *
+from miniflopzilla.aux.utils import *
+from miniflopzilla.models.exceptions import HandException
+from miniflopzilla.models.ranker import *
 
 
 

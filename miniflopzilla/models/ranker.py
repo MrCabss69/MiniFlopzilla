@@ -10,17 +10,9 @@ class Ranker:
 
     @staticmethod
     def rank_all_hands(hand_combos, return_all=False):
-
-        # start = timeit.default_timer()
         rank_res_arr = np.zeros(shape=(hand_combos.shape[1], hand_combos.shape[0]))
-        # if hand_combos.shape[0] >= 100000 and hand_combos.shape[1] > 1:
-        #     Parallel(n_jobs=multiprocessing.cpu_count(), backend="threading")\
-        #              (delayed(Ranker.parallel_rank_hand)(sce, hand_combos, rank_res_arr) for sce in range(hand_combos.shape[1]))
-        # else:
         for sce in range(hand_combos.shape[1]):
             Ranker.parallel_rank_hand(sce, hand_combos, rank_res_arr)
-        # end = timeit.default_timer()
-        # logging.info(f"Ranking all hands time cost: {end - start}")
         if return_all:
             return rank_res_arr
         else:
