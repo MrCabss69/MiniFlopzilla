@@ -14,8 +14,12 @@ class Player:
         self.hand_range.discard(hand)
         self.has_range = self.hand_range is not set()
 
-    def get_random_combo(self):
-        hand = random.choice(list(self.hand_range))
+    def get_random_combo(self,range=None):
+        if range is None:
+            range = self.hand_range
+        else:
+            range = range
+        hand = random.choice(list(range))
         if CONFIG['elements'].index(hand[0]) < CONFIG['elements'].index(hand[0]):
             # suited
             symbol = random.choice(['s','d','h','c'])
@@ -34,12 +38,12 @@ class Player:
                 combos = []
                 for symbol in symbols:
                     combos.append([hand[0] + symbol, hand[1] + symbol])
-                all_combos.extend(combos)
+                all_combos.append(random.choice(combos))
             else:
                 # off 
                 symbols = ['ds','sd','ch','cs']
                 combos =  []
                 for symbol in symbols:
                     combos.append([hand[0] + symbol[0], hand[1] + symbol[1]])
-                all_combos.extend(combos)
+                all_combos.append(random.choice(combos))
         return all_combos

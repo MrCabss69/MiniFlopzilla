@@ -191,7 +191,7 @@ class HoldemTable(Table):
                                           hand_limit=2,
                                           deck_type=deck_type)
 
-    def simulate(self, num_scenarios=150000, odds_type="tie_win", final_hand=False):
+    def simulate(self, num_scenarios=50000, odds_type="tie_win", final_hand=False):
 
         start = timeit.default_timer()
         community_cards, undrawn_combos = self.simulation_preparation(num_scenarios)
@@ -200,10 +200,10 @@ class HoldemTable(Table):
 
         if final_hand:
             final_hand_dict = self.hand_strength_analysis(res_arr)
-            logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
+            # logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
             return outcome_dict, final_hand_dict
 
-        logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
+        # logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
         return outcome_dict
 
     def simulate_calculation(self, community_cards, undrawn_combos):
