@@ -1,5 +1,5 @@
 # MiniFlopzilla
-GUI to calc range vs range odds in Texas No Limit Holdem
+Python module to calc range vs range odds in No Limit Holde'm
 
 ## Example:
 #### Selecting player 1 range
