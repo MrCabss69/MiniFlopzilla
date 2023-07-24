@@ -13,10 +13,14 @@ GUI to calc range vs range odds in Texas No Limit Holdem
 
 
 ## How to use
+
 1 - Download or clone this repo
+
 2 - Go to your local folder and open terminal
+
 3 - Execute:
-    python3 main.py
+
+        python3 main.py
 
 
 ## Adapted code for calculating odds
