@@ -24,3 +24,22 @@ class Player:
             # off 
             symbols = random.choice(['ds','sd','ch','cs'])
             return [ hand[0] + symbols[0], hand[1] + symbols[1]]
+        
+    def get_all_combos(self):
+        all_combos = []
+        for hand in list(self.hand_range):
+            if CONFIG['elements'].index(hand[0]) < CONFIG['elements'].index(hand[1]):
+                # suited
+                symbols = ['s','d','h','c']
+                combos = []
+                for symbol in symbols:
+                    combos.append([hand[0] + symbol, hand[1] + symbol])
+                all_combos.extend(combos)
+            else:
+                # off 
+                symbols = ['ds','sd','ch','cs']
+                combos =  []
+                for symbol in symbols:
+                    combos.append([hand[0] + symbol[0], hand[1] + symbol[1]])
+                all_combos.extend(combos)
+        return all_combos

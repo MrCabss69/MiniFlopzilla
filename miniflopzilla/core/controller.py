@@ -17,8 +17,7 @@ class Controller:
         self.button = Button(
             self.ventana, (self.shape[0]//2)-50, self.shape[1]-60, 100, 50, text=text,
             fontSize=20, margin=10, inactiveColour=(255, 0, 0),
-            pressedColour=(0, 255, 0), radius=10, onClick=self.start_simulation
-        )
+            pressedColour=(0, 255, 0), radius=10)
 
     def draw(self):
         self.ventana.fill((0, 0, 0))
@@ -48,15 +47,6 @@ class Controller:
         self.game.reset()
         self.main()
 
-    def start_simulation(self):
-        if not self.game.are_all_ranges_set():
-            next_player = 'p2' if self.game.is_p1_range_set() else 'p1'
-            self.create_button(f'Set {next_player} Range')
-        else:
-            self.show_loading_animation()
-            results = self.game.start_simulation()
-            self.show_simulation_results(results) if results else self.create_button('Set p1 Range')
-
     def show_loading_animation(self):
         self.ventana.fill((0, 0, 0))
         loading_animation = pygame.image.load('loading.png')
@@ -69,14 +59,19 @@ class Controller:
             pygame.quit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_y = pygame.mouse.get_pos()[1]
+            
             if mouse_y > CONFIG["n"]*CONFIG["cell_size"]:
-                if self.game.players[self.game.current_player].has_range:
-                    results = self.start_simulation()
-                    print(results)
-                else:
-                    print("Player must set range before starting simulation")
                 self.game.grid.reset()
-                self.game.current_player = (self.game.current_player + 1) % len(self.game.players)
+                if not self.game.players[self.game.current_player].has_range:
+                    print("Player must set range before starting simulation")
+                elif self.game.current_player == 1:
+                    self.show_loading_animation()
+                    results = self.game.start_simulation()
+                    self.show_simulation_results(results) if results else self.create_button('Set p1 Range')
+                else:
+                    next_player = 'p2' if self.game.is_p1_range_set() else 'p1'
+                    self.create_button(f'Set {next_player} Range')
+                    self.game.current_player = (self.game.current_player + 1) % len(self.game.players)
             else:
                 self.game.update_player_range(pygame.mouse.get_pos())
             self.draw()
